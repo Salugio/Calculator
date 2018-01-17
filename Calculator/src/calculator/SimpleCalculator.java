@@ -12,6 +12,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.SwingConstants;
 import java.awt.Color;
+import java.awt.event.ItemListener;
+import java.awt.event.ItemEvent;
 
 public class SimpleCalculator {
 
@@ -21,11 +23,14 @@ public class SimpleCalculator {
 	private String operation;
 	private double firstNumber;
 	private double answer;
-
+	
+	private static int posX = 450;
+	private static int posY = 450;
+	
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	public static void run() {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -54,7 +59,7 @@ public class SimpleCalculator {
 		frmSimpleCalculator.getContentPane().setBackground(Color.GRAY);
 		frmSimpleCalculator.setTitle("Simple Calc");
 		frmSimpleCalculator.setResizable(false);
-		frmSimpleCalculator.setBounds(500, 400, 255, 455);
+		frmSimpleCalculator.setBounds(posX, posY, 255, 455);
 		frmSimpleCalculator.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmSimpleCalculator.getContentPane().setLayout(null);
 		
@@ -364,6 +369,12 @@ public class SimpleCalculator {
 		frmSimpleCalculator.getContentPane().add(rdbtnSimpleCalculator);
 		
 		JRadioButton rdbtnSecondCalculator = new JRadioButton("Second Calculator");
+		rdbtnSecondCalculator.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent arg0) {
+				SecondCalculator.run();
+				frmSimpleCalculator.dispose();
+			}
+		});
 		rdbtnSecondCalculator.setForeground(Color.WHITE);
 		rdbtnSecondCalculator.setBackground(Color.GRAY);
 		rdbtnSecondCalculator.setBounds(10, 389, 130, 23);
@@ -373,6 +384,14 @@ public class SimpleCalculator {
 		CalculatorChoice.add(rdbtnSimpleCalculator);
 		CalculatorChoice.add(rdbtnSecondCalculator);
 		
+	}
+	
+	public static int getPosX() {
+		return posX;
+	}
+	
+	public static int getPosY() {
+		return posY;
 	}
 }
 
