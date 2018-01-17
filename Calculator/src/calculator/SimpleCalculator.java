@@ -24,8 +24,8 @@ public class SimpleCalculator {
 	private double firstNumber;
 	private double answer;
 	
-	private static int posX = 450;
-	private static int posY = 450;
+	private static int posX = 550;
+	private static int posY = 350;
 	
 	/**
 	 * Launch the application.
@@ -75,6 +75,7 @@ public class SimpleCalculator {
 		//============================== Row 1 ==============================
 		
 		JButton btnBackSpace = new JButton("<");
+		btnBackSpace.setToolTipText("Back space");
 		btnBackSpace.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String EnterNumber = textField.getText();
@@ -89,6 +90,7 @@ public class SimpleCalculator {
 		frmSimpleCalculator.getContentPane().add(btnBackSpace);
 		
 		JButton btnClear = new JButton("C");
+		btnClear.setToolTipText("Clear");
 		btnClear.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				textField.setText(null);
@@ -100,7 +102,8 @@ public class SimpleCalculator {
 		btnClear.setBounds(70, 62, 50, 50);
 		frmSimpleCalculator.getContentPane().add(btnClear);
 		
-		JButton btnPlusMinus = new JButton("+-");
+		JButton btnPlusMinus = new JButton("\u00B1");
+		btnPlusMinus.setToolTipText("Plus Minus");
 		btnPlusMinus.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String EnterNumber = textField.getText();
@@ -114,7 +117,7 @@ public class SimpleCalculator {
 		});
 		btnPlusMinus.setForeground(Color.BLACK);
 		btnPlusMinus.setBackground(Color.LIGHT_GRAY);
-		btnPlusMinus.setFont(new Font("Tahoma", Font.BOLD, 10));
+		btnPlusMinus.setFont(new Font("Tahoma", Font.BOLD, 18));
 		btnPlusMinus.setBounds(130, 62, 50, 50);
 		frmSimpleCalculator.getContentPane().add(btnPlusMinus);
 		
