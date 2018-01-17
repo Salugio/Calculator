@@ -70,20 +70,43 @@ public class SimpleCalculator {
 		//============================== Row 1 ==============================
 		
 		JButton btnBackSpace = new JButton("<");
+		btnBackSpace.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String EnterNumber = textField.getText();
+				EnterNumber = EnterNumber.substring(0, EnterNumber.length() - 1);
+				textField.setText(EnterNumber);
+			}
+		});
 		btnBackSpace.setForeground(Color.BLACK);
 		btnBackSpace.setBackground(Color.LIGHT_GRAY);
 		btnBackSpace.setFont(new Font("Tahoma", Font.BOLD, 15));
 		btnBackSpace.setBounds(10, 62, 50, 50);
 		frmSimpleCalculator.getContentPane().add(btnBackSpace);
 		
-		JButton btnReset = new JButton("C");
-		btnReset.setForeground(Color.BLACK);
-		btnReset.setBackground(Color.LIGHT_GRAY);
-		btnReset.setFont(new Font("Tahoma", Font.BOLD, 18));
-		btnReset.setBounds(70, 62, 50, 50);
-		frmSimpleCalculator.getContentPane().add(btnReset);
+		JButton btnClear = new JButton("C");
+		btnClear.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				textField.setText(null);
+			}
+		});
+		btnClear.setForeground(Color.BLACK);
+		btnClear.setBackground(Color.LIGHT_GRAY);
+		btnClear.setFont(new Font("Tahoma", Font.BOLD, 18));
+		btnClear.setBounds(70, 62, 50, 50);
+		frmSimpleCalculator.getContentPane().add(btnClear);
 		
 		JButton btnPlusMinus = new JButton("+-");
+		btnPlusMinus.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String EnterNumber = textField.getText();
+				if(EnterNumber.startsWith("-")) {
+					EnterNumber = EnterNumber.substring(1, EnterNumber.length());
+				} else {
+					EnterNumber = "-" + EnterNumber;
+				}
+				textField.setText(EnterNumber);
+			}
+		});
 		btnPlusMinus.setForeground(Color.BLACK);
 		btnPlusMinus.setBackground(Color.LIGHT_GRAY);
 		btnPlusMinus.setFont(new Font("Tahoma", Font.BOLD, 10));
@@ -147,6 +170,13 @@ public class SimpleCalculator {
 		frmSimpleCalculator.getContentPane().add(btn9);
 		
 		JButton btnMinus = new JButton("-");
+		btnMinus.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				operation = "-";
+				firstNumber = Double.parseDouble(textField.getText());
+				textField.setText(null);
+			}
+		});
 		btnMinus.setForeground(Color.BLACK);
 		btnMinus.setBackground(Color.LIGHT_GRAY);
 		btnMinus.setFont(new Font("Tahoma", Font.BOLD, 18));
@@ -196,6 +226,13 @@ public class SimpleCalculator {
 		frmSimpleCalculator.getContentPane().add(btn6);
 		
 		JButton btnMult = new JButton("*");
+		btnMult.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				operation = "*";
+				firstNumber = Double.parseDouble(textField.getText());
+				textField.setText(null);
+			}
+		});
 		btnMult.setForeground(Color.BLACK);
 		btnMult.setBackground(Color.LIGHT_GRAY);
 		btnMult.setFont(new Font("Tahoma", Font.BOLD, 18));
@@ -245,6 +282,13 @@ public class SimpleCalculator {
 		frmSimpleCalculator.getContentPane().add(btn3);
 		
 		JButton btnDiv = new JButton("/");
+		btnDiv.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				operation = "/";
+				firstNumber = Double.parseDouble(textField.getText());
+				textField.setText(null);
+			}
+		});
 		btnDiv.setForeground(Color.BLACK);
 		btnDiv.setBackground(Color.LIGHT_GRAY);
 		btnDiv.setFont(new Font("Tahoma", Font.BOLD, 18));
@@ -268,6 +312,14 @@ public class SimpleCalculator {
 		frmSimpleCalculator.getContentPane().add(btn0);
 		
 		JButton btnDot = new JButton(".");
+		btnDot.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(!textField.getText().contains(".")) {
+					String num = textField.getText() + ".";
+					textField.setText(num);
+				}
+			}
+		});
 		btnDot.setForeground(Color.BLACK);
 		btnDot.setBackground(Color.LIGHT_GRAY);
 		btnDot.setFont(new Font("Tahoma", Font.BOLD, 18));
@@ -281,6 +333,15 @@ public class SimpleCalculator {
 				
 				if(operation.equals("+")) {
 					answer = firstNumber + secondNumber;
+					textField.setText(String.valueOf(answer));
+				} else if(operation.equals("-")) {
+					answer = firstNumber - secondNumber;
+					textField.setText(String.valueOf(answer));
+				} else if(operation.equals("*")) {
+					answer = firstNumber * secondNumber;
+					textField.setText(String.valueOf(answer));
+				} else if(operation.equals("/")) {
+					answer = firstNumber / secondNumber;
 					textField.setText(String.valueOf(answer));
 				}
 			}
