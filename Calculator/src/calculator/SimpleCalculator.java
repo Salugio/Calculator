@@ -383,6 +383,18 @@ public class SimpleCalculator {
 		rdbtnSecondCalculator.setBounds(10, 389, 130, 23);
 		frmSimpleCalculator.getContentPane().add(rdbtnSecondCalculator);
 		
+		JRadioButton rdbtnPlot = new JRadioButton("Plot");		
+		rdbtnPlot.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent arg0) {
+				FunctionPlot.run();
+				frmSimpleCalculator.dispose();
+			}
+		});
+		rdbtnPlot.setForeground(Color.WHITE);
+		rdbtnPlot.setBackground(Color.GRAY);
+		rdbtnPlot.setBounds(140, 363, 100, 23);
+		frmSimpleCalculator.getContentPane().add(rdbtnPlot);
+		
 		ButtonGroup CalculatorChoice = new ButtonGroup();
 		CalculatorChoice.add(rdbtnSimpleCalculator);
 		CalculatorChoice.add(rdbtnSecondCalculator);
@@ -397,14 +409,3 @@ public class SimpleCalculator {
 		return posY;
 	}
 }
-
-
-
-
-
-
-
-
-
-
-

@@ -20,7 +20,7 @@ public class SecondCalculator {
 	private JFrame frmSecondCalculator;
 	private JTextField textField;
 	
-	private int posX = SimpleCalculator.getPosX();;
+	private int posX = SimpleCalculator.getPosX();
 	private int posY = SimpleCalculator.getPosY();
 	
 	private String operation;
@@ -469,8 +469,22 @@ public class SecondCalculator {
 		rdbtnSecondCalculator.setBounds(10, 389, 130, 23);
 		frmSecondCalculator.getContentPane().add(rdbtnSecondCalculator);
 		
+		JRadioButton rdbtnPlot = new JRadioButton("Plot");
+		rdbtnPlot.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent arg0) {
+				FunctionPlot.run();
+				frmSecondCalculator.dispose();
+			}
+		});
+		rdbtnPlot.setForeground(Color.WHITE);
+		rdbtnPlot.setBackground(Color.GRAY);
+		rdbtnPlot.setBounds(140, 363, 109, 23);
+		frmSecondCalculator.getContentPane().add(rdbtnPlot);
+		
 		ButtonGroup CalculatorChoice = new ButtonGroup();
 		CalculatorChoice.add(rdbtnSimpleCalculator);
 		CalculatorChoice.add(rdbtnSecondCalculator);
+		CalculatorChoice.add(rdbtnPlot);		
+		
 	}
 }
