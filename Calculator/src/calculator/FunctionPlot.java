@@ -20,6 +20,9 @@ import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 import java.awt.Color;
 import javax.swing.JRadioButton;
+import javax.swing.JComboBox;
+import javax.swing.DefaultComboBoxModel;
+import java.awt.Font;
 
 public class FunctionPlot {
 
@@ -68,16 +71,40 @@ public class FunctionPlot {
 		lblPic.setVisible(true);
 		frmPlot.getContentPane().add(lblPic);
 		
+		JComboBox<String> comboBox = new JComboBox<String>();
+		comboBox.setFont(new Font("Tahoma", Font.PLAIN, 22));
+		comboBox.setModel(new DefaultComboBoxModel<String>(new String[] {"Choose function", "x\u00B3", "x\u00B2", "sqrt(x)"}));
+		comboBox.setBounds(115, 11, 250, 35);
+		frmPlot.getContentPane().add(comboBox);
+		
 		JButton btnCalculate = new JButton("Show");
 		btnCalculate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				double[] a = new double[101];
+				double[] b = new double[101];
+				String functionChoice = comboBox.getSelectedItem().toString();
 				
-				double[] a = new double[361];
-				double[] b = new double[361];
-				
-				for(int j = 0; j <= 360; j++) {
-					a[j] = Math.cos(j);
-					b[j] = j;
+				switch(functionChoice) {
+					case "x\u00B3":
+						for(int j = 0; j <= 100; j++) {
+							a[j] = j;
+							b[j] = Math.pow(j, 3);
+						}
+						break;
+					
+					case "x\u00B2":
+						for(int j = 0; j <= 100; j++) {
+							a[j] = j;
+							b[j] = Math.pow(j, 2);
+						}
+						break;
+						
+					case "sqrt(x)":
+						for(int j = 0; j <= 100; j++) {
+							a[j] = j;
+							b[j] = Math.pow(j, 0.5);
+						}
+						break;
 				}
 				
 				PlotXY(a, b);				
@@ -159,7 +186,6 @@ public class FunctionPlot {
 			);
 		} catch(Exception e) {
 			System.out.println("Error");
-		}
-		
+		}	
 	}
 }
