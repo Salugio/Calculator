@@ -57,7 +57,7 @@ public class SecondCalculator {
 		frmSecondCalculator = new JFrame();
 		frmSecondCalculator.getContentPane().setBackground(Color.GRAY);
 		frmSecondCalculator.getContentPane().setForeground(Color.BLACK);
-		frmSecondCalculator.setBounds(posX, posY, 315, 445);
+		frmSecondCalculator.setBounds(posX, posY, 315, 453);
 		frmSecondCalculator.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmSecondCalculator.getContentPane().setLayout(null);
 		frmSecondCalculator.setTitle("Second Calc");
