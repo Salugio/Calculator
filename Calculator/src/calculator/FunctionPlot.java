@@ -10,10 +10,6 @@ import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
-
-import javax.script.ScriptEngine;
-import javax.script.ScriptEngineManager;
-import javax.script.ScriptException;
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -24,8 +20,6 @@ import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 import java.awt.Color;
 import javax.swing.JRadioButton;
-import javax.swing.JTextField;
-import javax.swing.SwingConstants;
 
 public class FunctionPlot {
 
@@ -33,7 +27,6 @@ public class FunctionPlot {
 	
 	private int posX = SimpleCalculator.getPosX();
 	private int posY = SimpleCalculator.getPosY();
-	private JTextField txtFormula;
 
 	/**
 	 * Launch the application.
@@ -71,44 +64,29 @@ public class FunctionPlot {
 		
 		JLabel lblPic = new JLabel();
 		lblPic.setBackground(Color.BLACK);
-		lblPic.setBounds(10, 57, 500, 300);
+		lblPic.setBounds(10, 55, 500, 300);
 		lblPic.setVisible(true);
 		frmPlot.getContentPane().add(lblPic);
 		
-		
-		//============================== Calculate Button ==============================
-		
 		JButton btnCalculate = new JButton("Show");
 		btnCalculate.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {				
-				String formula = txtFormula.getText();
-				double[] a = new double[101];
-				double[] b = new double[101];
-				int i = 0;
-				Object ans;
+			public void actionPerformed(ActionEvent arg0) {
 				
-				for(int x = -50; x <= 50; x++) {
-					a[i] = x;
-					//formula = formula.replace("x", String.valueOf(x));
-					try {
-						ans = calculateFormula(formula);
-						b[i] = (double) ans;
-					} catch (ScriptException e) {
-						e.printStackTrace();
-					}
-					
-					i++;
+				double[] a = new double[361];
+				double[] b = new double[361];
+				
+				for(int j = 0; j <= 360; j++) {
+					a[j] = Math.cos(j);
+					b[j] = j;
 				}
 				
 				PlotXY(a, b);				
+				
 				lblPic.setIcon(new ImageIcon("C:\\Users\\geisk\\Desktop\\XYPlot.jpeg"));
 			}
 		});
-		btnCalculate.setBounds(194, 11, 90, 35);
+		btnCalculate.setBounds(10, 11, 90, 35);
 		frmPlot.getContentPane().add(btnCalculate);
-		
-		
-		//============================== Radio Buttons ==============================
 		
 		JRadioButton rdbtnSimpleCalculator = new JRadioButton("Simple Calculator");
 		rdbtnSimpleCalculator.addItemListener(new ItemListener() {
@@ -146,14 +124,6 @@ public class FunctionPlot {
 		choice.add(rdbtnSecondCalculator);
 		choice.add(rdbtnPlot);
 		
-		//============================== Text Field ==============================
-		
-		txtFormula = new JTextField();
-		txtFormula.setHorizontalAlignment(SwingConstants.RIGHT);
-		txtFormula.setBounds(10, 11, 174, 35);
-		frmPlot.getContentPane().add(txtFormula);
-		txtFormula.setColumns(10);
-		
 	}
 	
 	/**
@@ -189,44 +159,7 @@ public class FunctionPlot {
 			);
 		} catch(Exception e) {
 			System.out.println("Error");
-		}		
-	}
-	
-	/**
-	 * Converts the String to formula and calculates it
-	 * @throws ScriptException 
-	 */
-	public Object calculateFormula(String equation) throws ScriptException {
-		ScriptEngineManager mgr = new ScriptEngineManager();
-		ScriptEngine engine = mgr.getEngineByName("JavaScript");
-		return engine.eval(equation);
+		}
+		
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
