@@ -73,7 +73,7 @@ public class FunctionPlot {
 		
 		JComboBox<String> comboBox = new JComboBox<String>();
 		comboBox.setFont(new Font("Tahoma", Font.PLAIN, 22));
-		comboBox.setModel(new DefaultComboBoxModel<String>(new String[] {"Choose function", "x\u00B3", "x\u00B2", "sqrt(x)"}));
+		comboBox.setModel(new DefaultComboBoxModel<String>(new String[] {"Choose function", "x\u00B3", "x\u00B2", "sqrt(x)", "log(x)+1", "cos(x)", "sin(x)"}));
 		comboBox.setBounds(115, 11, 250, 35);
 		frmPlot.getContentPane().add(comboBox);
 		
@@ -103,6 +103,27 @@ public class FunctionPlot {
 						for(int j = 0; j <= 100; j++) {
 							a[j] = j;
 							b[j] = Math.pow(j, 0.5);
+						}
+						break;
+						
+					case "log(x)+1":
+						for(int j = 0; j <= 100; j++) {
+							a[j] = j;
+							b[j] = Math.log10(j+1);
+						}
+						break;
+					
+					case "cos(x)":
+						for(int j = 0; j <= 100; j++) {
+							a[j] = j;
+							b[j] = Math.cos(j);
+						}
+						break;
+						
+					case "sin(x)":
+						for(int j = 0; j <= 100; j++) {
+							a[j] = j;
+							b[j] = Math.sin(j);
 						}
 						break;
 				}
