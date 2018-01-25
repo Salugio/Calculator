@@ -30,6 +30,8 @@ public class FunctionPlot {
 	
 	private int posX = SimpleCalculator.getPosX();
 	private int posY = SimpleCalculator.getPosY();
+	
+	private String plotName = null;
 
 	/**
 	 * Launch the application.
@@ -73,7 +75,7 @@ public class FunctionPlot {
 		
 		JComboBox<String> comboBox = new JComboBox<String>();
 		comboBox.setFont(new Font("Tahoma", Font.PLAIN, 22));
-		comboBox.setModel(new DefaultComboBoxModel<String>(new String[] {"Choose function", "x\u00B3", "x\u00B2", "sqrt(x)"}));
+		comboBox.setModel(new DefaultComboBoxModel<String>(new String[] {"Choose function", "x\u00B3", "x\u00B2", "sqrt(x)", "log(x)+1", "cos(x)", "sin(x)"}));
 		comboBox.setBounds(115, 11, 250, 35);
 		frmPlot.getContentPane().add(comboBox);
 		
@@ -83,12 +85,15 @@ public class FunctionPlot {
 				double[] a = new double[101];
 				double[] b = new double[101];
 				String functionChoice = comboBox.getSelectedItem().toString();
+				String plotName = null;
 				
 				switch(functionChoice) {
 					case "x\u00B3":
 						for(int j = 0; j <= 100; j++) {
 							a[j] = j;
 							b[j] = Math.pow(j, 3);
+							plotName = "plotImages\\x3Plot.jpeg";
+							setPlotName(plotName);
 						}
 						break;
 					
@@ -96,6 +101,8 @@ public class FunctionPlot {
 						for(int j = 0; j <= 100; j++) {
 							a[j] = j;
 							b[j] = Math.pow(j, 2);
+							plotName = "plotImages\\x2Plot.jpeg";
+							setPlotName(plotName);
 						}
 						break;
 						
@@ -103,13 +110,42 @@ public class FunctionPlot {
 						for(int j = 0; j <= 100; j++) {
 							a[j] = j;
 							b[j] = Math.pow(j, 0.5);
+							plotName = "plotImages\\sqrtPlot.jpeg";
+							setPlotName(plotName);
+						}
+						break;
+						
+					case "log(x)+1":
+						for(int j = 0; j <= 100; j++) {
+							a[j] = j;
+							b[j] = Math.log10(j+1);
+							plotName = "plotImages\\log+1.jpeg";
+							setPlotName(plotName);
+						}
+						break;
+					
+					case "cos(x)":
+						for(int j = 0; j <= 100; j++) {
+							a[j] = j;
+							b[j] = Math.cos(j);
+							plotName = "plotImages\\cos.jpeg";
+							setPlotName(plotName);
+						}
+						break;
+						
+					case "sin(x)":
+						for(int j = 0; j <= 100; j++) {
+							a[j] = j;
+							b[j] = Math.sin(j);
+							plotName = "plotImages\\sin.jpeg";
+							setPlotName(plotName);
 						}
 						break;
 				}
 				
 				PlotXY(a, b);				
 				
-				lblPic.setIcon(new ImageIcon("C:\\Users\\geisk\\Desktop\\XYPlot.jpeg"));
+				lblPic.setIcon(new ImageIcon(plotName));
 			}
 		});
 		btnCalculate.setBounds(10, 11, 90, 35);
@@ -179,13 +215,27 @@ public class FunctionPlot {
 		
 		try {
 			ChartUtilities.saveChartAsJPEG(
-				new File("C:\\Users\\geisk\\Desktop\\XYPlot.jpeg"),
+				new File(getPlotName()),
 				chart,
 				500,
 				300
 			);
 		} catch(Exception e) {
 			System.out.println("Error");
-		}	
+		}
+	}
+	
+	/**
+	 * Setter for plotName
+	 */
+	public void setPlotName(String plotName) {
+		this.plotName = plotName;
+	}
+	
+	/**
+	 * Getter for plotName
+	 */
+	public String getPlotName() {
+		return plotName;
 	}
 }
