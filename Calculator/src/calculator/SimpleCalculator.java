@@ -78,9 +78,11 @@ public class SimpleCalculator {
 		btnBackSpace.setToolTipText("Back space");
 		btnBackSpace.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String EnterNumber = textField.getText();
-				EnterNumber = EnterNumber.substring(0, EnterNumber.length() - 1);
-				textField.setText(EnterNumber);
+				if(!textField.getText().isEmpty()) {
+					String EnterNumber = textField.getText();
+					EnterNumber = EnterNumber.substring(0, EnterNumber.length() - 1);
+					textField.setText(EnterNumber);
+				}
 			}
 		});
 		btnBackSpace.setForeground(Color.BLACK);

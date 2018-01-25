@@ -32,7 +32,11 @@ public class FunctionPlot {
 	private int posY = SimpleCalculator.getPosY();
 	
 	private String plotName = null;
+	private String pathImage = "plotImages\\";
 
+	private JComboBox<String> comboBox;
+	private JLabel lblPic;
+	
 	/**
 	 * Launch the application.
 	 */
@@ -67,13 +71,13 @@ public class FunctionPlot {
 		frmPlot.getContentPane().setLayout(null);
 		frmPlot.setTitle("Function Plot");
 		
-		JLabel lblPic = new JLabel();
+		lblPic = new JLabel();
 		lblPic.setBackground(Color.BLACK);
 		lblPic.setBounds(10, 55, 500, 300);
 		lblPic.setVisible(true);
 		frmPlot.getContentPane().add(lblPic);
 		
-		JComboBox<String> comboBox = new JComboBox<String>();
+		comboBox = new JComboBox<String>();
 		comboBox.setFont(new Font("Tahoma", Font.PLAIN, 22));
 		comboBox.setModel(new DefaultComboBoxModel<String>(new String[] {"Choose function", "x\u00B3", "x\u00B2", "sqrt(x)", "log(x)+1", "cos(x)", "sin(x)"}));
 		comboBox.setBounds(115, 11, 250, 35);
@@ -82,70 +86,7 @@ public class FunctionPlot {
 		JButton btnCalculate = new JButton("Show");
 		btnCalculate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				double[] a = new double[101];
-				double[] b = new double[101];
-				String functionChoice = comboBox.getSelectedItem().toString();
-				String plotName = null;
-				
-				switch(functionChoice) {
-					case "x\u00B3":
-						for(int j = 0; j <= 100; j++) {
-							a[j] = j;
-							b[j] = Math.pow(j, 3);
-							plotName = "plotImages\\x3Plot.jpeg";
-							setPlotName(plotName);
-						}
-						break;
-					
-					case "x\u00B2":
-						for(int j = 0; j <= 100; j++) {
-							a[j] = j;
-							b[j] = Math.pow(j, 2);
-							plotName = "plotImages\\x2Plot.jpeg";
-							setPlotName(plotName);
-						}
-						break;
-						
-					case "sqrt(x)":
-						for(int j = 0; j <= 100; j++) {
-							a[j] = j;
-							b[j] = Math.pow(j, 0.5);
-							plotName = "plotImages\\sqrtPlot.jpeg";
-							setPlotName(plotName);
-						}
-						break;
-						
-					case "log(x)+1":
-						for(int j = 0; j <= 100; j++) {
-							a[j] = j;
-							b[j] = Math.log10(j+1);
-							plotName = "plotImages\\log+1.jpeg";
-							setPlotName(plotName);
-						}
-						break;
-					
-					case "cos(x)":
-						for(int j = 0; j <= 100; j++) {
-							a[j] = j;
-							b[j] = Math.cos(j);
-							plotName = "plotImages\\cos.jpeg";
-							setPlotName(plotName);
-						}
-						break;
-						
-					case "sin(x)":
-						for(int j = 0; j <= 100; j++) {
-							a[j] = j;
-							b[j] = Math.sin(j);
-							plotName = "plotImages\\sin.jpeg";
-							setPlotName(plotName);
-						}
-						break;
-				}
-				
-				PlotXY(a, b);				
-				
-				lblPic.setIcon(new ImageIcon(plotName));
+				choseAndPlot();
 			}
 		});
 		btnCalculate.setBounds(10, 11, 90, 35);
@@ -213,16 +154,88 @@ public class FunctionPlot {
 				false
 		);
 		
-		try {
-			ChartUtilities.saveChartAsJPEG(
-				new File(getPlotName()),
-				chart,
-				500,
-				300
-			);
-		} catch(Exception e) {
-			System.out.println("Error");
+		if(!comboBox.getSelectedItem().equals("Choose function")) {
+			try {
+				ChartUtilities.saveChartAsJPEG(
+					new File(getPlotName()),
+					chart,
+					500,
+					300
+				);
+			} catch(Exception e) {
+				System.out.println("Error");
+			}
 		}
+	}
+	
+	/**
+	 * Method to chose and plot a function by clicking on JButton "Show"
+	 */
+	public void choseAndPlot() {
+		double[] a = new double[101];
+		double[] b = new double[101];
+		String functionChoice = comboBox.getSelectedItem().toString();
+		String plotName = null;
+		
+		switch(functionChoice) {
+			case "x\u00B3":
+				for(int j = 0; j <= 100; j++) {
+					a[j] = j;
+					b[j] = Math.pow(j, 3);
+					plotName = pathImage + "x3Plot.jpeg";
+					setPlotName(plotName);
+				}
+				break;
+			
+			case "x\u00B2":
+				for(int j = 0; j <= 100; j++) {
+					a[j] = j;
+					b[j] = Math.pow(j, 2);
+					plotName = pathImage + "x2Plot.jpeg";
+					setPlotName(plotName);
+				}
+				break;
+				
+			case "sqrt(x)":
+				for(int j = 0; j <= 100; j++) {
+					a[j] = j;
+					b[j] = Math.pow(j, 0.5);
+					plotName = pathImage + "sqrtPlot.jpeg";
+					setPlotName(plotName);
+				}
+				break;
+				
+			case "log(x)+1":
+				for(int j = 0; j <= 100; j++) {
+					a[j] = j;
+					b[j] = Math.log10(j+1);
+					plotName = pathImage + "log+1.jpeg";
+					setPlotName(plotName);
+				}
+				break;
+			
+			case "cos(x)":
+				for(int j = 0; j <= 100; j++) {
+					a[j] = j;
+					b[j] = Math.cos(j);
+					plotName = pathImage + "cos.jpeg";
+					setPlotName(plotName);
+				}
+				break;
+				
+			case "sin(x)":
+				for(int j = 0; j <= 100; j++) {
+					a[j] = j;
+					b[j] = Math.sin(j);
+					plotName = pathImage + "sin.jpeg";
+					setPlotName(plotName);
+				}
+				break;
+		}
+		
+		PlotXY(a, b);				
+		
+		lblPic.setIcon(new ImageIcon(plotName));
 	}
 	
 	/**
