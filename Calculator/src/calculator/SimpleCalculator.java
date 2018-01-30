@@ -27,6 +27,7 @@ public class SimpleCalculator {
 	private static int posX = 550;
 	private static int posY = 350;
 	
+	
 	/**
 	 * Launch the application.
 	 */
@@ -43,6 +44,7 @@ public class SimpleCalculator {
 		});
 	}
 
+	
 	/**
 	 * Create the application.
 	 */
@@ -50,6 +52,7 @@ public class SimpleCalculator {
 		initialize();
 	}
 
+	
 	/**
 	 * Initialize the contents of the frame.
 	 */
@@ -363,7 +366,6 @@ public class SimpleCalculator {
 		frmSimpleCalculator.getContentPane().add(btnEqual);		
 		
 		
-		
 		//============================ Radio Buttons ===========================
 		
 		JRadioButton rdbtnSimpleCalculator = new JRadioButton("Simple Calculator");
@@ -399,14 +401,21 @@ public class SimpleCalculator {
 		
 		ButtonGroup CalculatorChoice = new ButtonGroup();
 		CalculatorChoice.add(rdbtnSimpleCalculator);
-		CalculatorChoice.add(rdbtnSecondCalculator);
-		
+		CalculatorChoice.add(rdbtnSecondCalculator);		
 	}
 	
+	
+	/**
+	 * Get the x-axis position of the window
+	 */
 	public static int getPosX() {
 		return posX;
 	}
 	
+	
+	/**
+	 * Get the y-axis position of the window
+	 */
 	public static int getPosY() {
 		return posY;
 	}

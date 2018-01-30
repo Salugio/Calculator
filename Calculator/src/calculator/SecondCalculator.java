@@ -26,6 +26,7 @@ public class SecondCalculator {
 	private String operation;
 	private double firstNumber;
 	private double answer;
+	
 
 	/**
 	 * Launch the application.
@@ -42,6 +43,7 @@ public class SecondCalculator {
 			}
 		});
 	}
+	
 
 	/**
 	 * Create the application.
@@ -49,6 +51,7 @@ public class SecondCalculator {
 	public SecondCalculator() {
 		initialize();
 	}
+	
 
 	/**
 	 * Initialize the contents of the frame.
@@ -212,11 +215,13 @@ public class SecondCalculator {
 		btnSquareRoot.setToolTipText("Square Root");
 		btnSquareRoot.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				firstNumber = Double.parseDouble(textField.getText());
-				if(firstNumber != 0) {
-					firstNumber = Math.pow(firstNumber, 0.5);
+				if(!textField.getText().isEmpty()) {
+					firstNumber = Double.parseDouble(textField.getText());
+					if(firstNumber != 0) {
+						firstNumber = Math.pow(firstNumber, 0.5);
+					}
+					textField.setText(String.valueOf(firstNumber));
 				}
-				textField.setText(String.valueOf(firstNumber));
 			}
 		});
 		btnSquareRoot.setFont(new Font("Tahoma", Font.BOLD, 18));
@@ -448,8 +453,7 @@ public class SecondCalculator {
 		btnModulo.setBounds(250, 306, 50, 50);
 		frmSecondCalculator.getContentPane().add(btnModulo);
 		
-		
-		
+				
 		//============================ Radio Buttons ===========================
 		
 		JRadioButton rdbtnSimpleCalculator = new JRadioButton("Simple Calculator");
@@ -486,7 +490,7 @@ public class SecondCalculator {
 		ButtonGroup CalculatorChoice = new ButtonGroup();
 		CalculatorChoice.add(rdbtnSimpleCalculator);
 		CalculatorChoice.add(rdbtnSecondCalculator);
-		CalculatorChoice.add(rdbtnPlot);		
+		CalculatorChoice.add(rdbtnPlot);
 		
 	}
 }

@@ -37,6 +37,7 @@ public class FunctionPlot {
 	private JComboBox<String> comboBox;
 	private JLabel lblPic;
 	
+	
 	/**
 	 * Launch the application.
 	 */
@@ -52,6 +53,7 @@ public class FunctionPlot {
 			}
 		});
 	}
+	
 
 	/**
 	 * Create the application.
@@ -79,7 +81,7 @@ public class FunctionPlot {
 		
 		comboBox = new JComboBox<String>();
 		comboBox.setFont(new Font("Tahoma", Font.PLAIN, 22));
-		comboBox.setModel(new DefaultComboBoxModel<String>(new String[] {"Choose function", "x\u00B3", "x\u00B2", "sqrt(x)", "log(x)+1", "cos(x)", "sin(x)"}));
+		comboBox.setModel(new DefaultComboBoxModel<String>(new String[] {"Choose function", "x\u00B3", "x\u00B2", "sqrt(x)", "log(x)+1", "cos(x)", "sin(x)", "x˟"}));
 		comboBox.setBounds(115, 11, 250, 35);
 		frmPlot.getContentPane().add(comboBox);
 		
@@ -126,16 +128,16 @@ public class FunctionPlot {
 		ButtonGroup choice = new ButtonGroup();
 		choice.add(rdbtnSimpleCalculator);
 		choice.add(rdbtnSecondCalculator);
-		choice.add(rdbtnPlot);
-		
+		choice.add(rdbtnPlot);		
 	}
+	
 	
 	/**
 	 * Creates a JPEG File with the Graph
 	 */
 	public void PlotXY(double[] x, double[] y) {
 	
-		XYSeries series = new XYSeries("Graph");
+		XYSeries series = new XYSeries(comboBox.getSelectedItem().toString());
 		for(int i = 0; i < x.length; i++) {
 			series.add(x[i], y[i]);
 		}
@@ -144,9 +146,9 @@ public class FunctionPlot {
 		dataSet.addSeries(series);
 		
 		JFreeChart chart = ChartFactory.createXYLineChart(
-				"XY Chart",
-				"x-axis",
-				"y-axis",
+				"Function plot",
+				null,
+				null,
 				dataSet,
 				PlotOrientation.VERTICAL,
 				true,
@@ -167,6 +169,7 @@ public class FunctionPlot {
 			}
 		}
 	}
+	
 	
 	/**
 	 * Method to chose and plot a function by clicking on JButton "Show"
@@ -231,6 +234,15 @@ public class FunctionPlot {
 					setPlotName(plotName);
 				}
 				break;
+				
+			case "x˟":
+				for(int j = 0; j <= 50; j++) {
+					a[j] = j;
+					b[j] = Math.pow(j, j);
+					plotName = pathImage + "power.jpeg";
+					setPlotName(plotName);
+				}
+				break;
 		}
 		
 		PlotXY(a, b);				
@@ -238,12 +250,14 @@ public class FunctionPlot {
 		lblPic.setIcon(new ImageIcon(plotName));
 	}
 	
+	
 	/**
 	 * Setter for plotName
 	 */
 	public void setPlotName(String plotName) {
 		this.plotName = plotName;
 	}
+	
 	
 	/**
 	 * Getter for plotName
